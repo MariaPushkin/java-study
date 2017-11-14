@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+
+//User unpit for calculatations
 public class InteractRunner {
 	public static void main(String[] arg) {
 		Scanner reader = new Scanner(System.in);
@@ -12,14 +14,22 @@ public class InteractRunner {
 				String action = reader.next();
 				System.out.println("Enter argument: ");
 				String args = reader.next();
-				if(action.equals("a"))
+				switch (action) {
+				case "a": 
 					calc.add(Integer.valueOf(args));
-				if(action.equals("r"))
+					break;
+				case "r":
 					calc.remove(Integer.valueOf(args));
-				if(action.equals("m"))
+					break;
+				case "m":
 					calc.mult(Integer.valueOf(args));
-				if(action.equals("d")) 
+					break;
+				case "d":
 					calc.div(Integer.valueOf(args));
+					break;
+				default:
+					break;
+				}
 				System.out.println("Result: " + calc.getResult());
 				System.out.println("Exit: y - yes/n - no ");
 				exit = reader.next();
