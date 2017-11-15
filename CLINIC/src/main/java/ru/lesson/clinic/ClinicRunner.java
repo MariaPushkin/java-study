@@ -24,42 +24,38 @@ public class ClinicRunner {
 				String action = reader.next();
 				switch (action) {
 				//добавление клиента
-				case "a": 
+				case "a":
 					boolean wrong = false;
 					System.out.println("Enter your name");
 					String name = reader.next();
-					for(int i = 0; i < clinic.getCurrCol(); i++){
-						if(name.equals(clinic.clients[i].getId())) {
-							System.out.println("Such person has already exists");
-							wrong = true;
-						}
-					}
-					if(!wrong){
+					if(!clinic.checkClientByName(name)) {
 						System.out.println("What type of Animal do u have? Cat - c, Dog - d, CatDog - cd");
 						String animalType = reader.next();
 						switch (animalType) {
-						case "c":
-							System.out.println("Enter your cat name");
-							String petName = reader.next();
-							clinic.addClient(clinic.getCurrCol(), new Client(name, new Cat(petName)));
-							break;
-						case "d":
-							System.out.println("Enter your dog name");
-							String petName2 = reader.next();
-							clinic.addClient(clinic.getCurrCol(), new Client(name, new Dog(new Animal(petName2))));
-							break;
-						case "cd":
-							System.out.println("Enter your cat name");
-							String catName = reader.next();
-							System.out.println("Enter your dog name");
-							String dogName = reader.next();
-							clinic.addClient(clinic.getCurrCol(), new Client(name, new CatDog(new Cat(catName), new Dog(new Animal(dogName)))));
-							break;
-						default:
-							System.out.println("Somth wrong");
-							break;
+							case "c":
+								System.out.println("Enter your cat name");
+								String petName = reader.next();
+								clinic.addClient(clinic.getCurrCol(), new Client(name, new Cat(petName)));
+								break;
+							case "d":
+								System.out.println("Enter your dog name");
+								String petName2 = reader.next();
+								clinic.addClient(clinic.getCurrCol(), new Client(name, new Dog(new Animal(petName2))));
+								break;
+							case "cd":
+								System.out.println("Enter your cat name");
+								String catName = reader.next();
+								System.out.println("Enter your dog name");
+								String dogName = reader.next();
+								clinic.addClient(clinic.getCurrCol(), new Client(name, new CatDog(new Cat(catName), new Dog(new Animal(dogName)))));
+								break;
+							default:
+								System.out.println("Somth wrong");
+								break;
 						}
 					}
+					else
+						System.out.println("Such person has already exists");
 					break;
 				//нахождение клиентов по имени питомца
 				case "f":
@@ -71,7 +67,7 @@ public class ClinicRunner {
 							System.out.println("No clients with such pet exists");
 						else {
 							System.out.println("Clients with such pets");
-							for(int j = 0; j < foundClients.length; j++) 
+							for(int j = 0; j < foundClients.length; j++)
 								System.out.println(foundClients[j].getId());
 						}
 					} catch (NullPointerException e) {
@@ -81,18 +77,16 @@ public class ClinicRunner {
 				case "cc":
 					System.out.println("Enter your name");
 					String currName = reader.next();
-					boolean exist = false;
-					for(int i = 0; i < clinic.getCurrCol(); i++){
-						if(currName.equals(clinic.clients[i].getId())) {
-							System.out.println("Enter new name");
-							String newCurrName = reader.next();
-							clinic.clients[i].changeName(newCurrName);
-							exist = true;
-							break;
-						}
+
+					try {
+						int clientPos = clinic.findClientByName(currName);
+						System.out.println("Enter new name");
+						String newCurrName = reader.next();
+						clinic.clients[clientPos].changeName(newCurrName);
+
+					} catch (UserException e) {
+						System.out.println(e.getMessage());
 					}
-					if(!exist)
-						System.out.println("No such person exists");
 					break;
 				//изменение имени питомца
 				case "cp":
@@ -111,7 +105,7 @@ public class ClinicRunner {
 							else {
 								System.out.println("Enter new pet name");
 								String newPetName = reader.next();
-								clinic.clients[i].getPet().changeName(newPetName);	
+								clinic.clients[i].getPet().changeName(newPetName);
 							}
 							exist2 = true;
 							break;
@@ -124,9 +118,9 @@ public class ClinicRunner {
 				case "d":
 					System.out.println("Enter name of deleating client");
 					String delName = reader.next();
-					if(clinic.delClient(delName)) 
+					if(clinic.delClient(delName))
 						System.out.println("Client deleted successfuly");
-					else 
+					else
 						System.out.println("Impossoble delete this client");
 					break;
 				//показ всех клиентов
@@ -145,7 +139,6 @@ public class ClinicRunner {
 				default:
 					break;
 				}
-
 				System.out.println("Exit: y - yes/n - no ");
 				exit = reader.next();
 			}

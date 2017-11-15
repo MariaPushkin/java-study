@@ -28,7 +28,11 @@ public class InteractRunner {
 					calc.mult(Integer.valueOf(args1), Integer.valueOf(args2));
 					break;
 				case "d":
-					calc.div(Integer.valueOf(args1), Integer.valueOf(args2));
+					try {
+						calc.div(Integer.valueOf(args1), Integer.valueOf(args2));
+					} catch (ArithmeticException e) {
+						System.out.println("You try to divide by zero");
+					}
 					break;
 				default:
 					break;
@@ -44,7 +48,10 @@ public class InteractRunner {
 						calc.cleanResult();
 				}
 			}
-		}	finally {
+		} catch (UserException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
 				reader.close();
 			}
 	}

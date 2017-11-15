@@ -20,6 +20,18 @@ public class CalculatorTest {
         Assert.assertEquals(2, calculator.getResult());
     }
 
+    @Test(expected = UserException.class)
+    public void divUserException() throws Exception {
+        Calculator calculator = new Calculator();
+        calculator.div();
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void divArithException() throws Exception {
+        Calculator calculator = new Calculator();
+        calculator.div(4,0);
+    }
+
     @Test
     public void remove() throws Exception {
         Calculator calculator = new Calculator();
@@ -33,4 +45,6 @@ public class CalculatorTest {
         calculator.mult(5,2);
         Assert.assertEquals(10, calculator.getResult());
     }
+
+
 }

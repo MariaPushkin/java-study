@@ -60,11 +60,33 @@ public class Clinic {
 		Показать клиента с определенной позиции
 		дата 15.11.17
 	*/
-	public Client getClient(int position) {
+	public Client getClient(int position) throws UserException{
 		if(position >= currCol)
-			return null;
+			throw new UserException("No such person exists");
 		else
 			return clients[position];
+	}
+
+	/*
+		Поиск клиента по имени
+		дата 15.11.17
+	*/
+	public int findClientByName(final String name) throws UserException{
+		for(int i = 0; i < this.currCol; i++){
+			if(name.equals(this.clients[i].getId())) {
+				return i;
+			}
+		}
+		throw new UserException("No such person exists");
+	}
+
+	public boolean checkClientByName(final String name) {
+		for(int i = 0; i < this.currCol; i++){
+			if(name.equals(this.clients[i].getId())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
 

@@ -1,8 +1,1 @@
-Dog.class
-Cat.class
-CatDog.class
-Client.class
-ClinicRunner.class
-Pet.class
-Clinic.class
-Animal.class
+ru\lesson\clinic\UserException.class
