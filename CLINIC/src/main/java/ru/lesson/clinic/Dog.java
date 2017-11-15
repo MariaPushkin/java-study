@@ -1,3 +1,4 @@
+package ru.lesson.clinic;
 /*
 	Пес
 	дата 14.11.17

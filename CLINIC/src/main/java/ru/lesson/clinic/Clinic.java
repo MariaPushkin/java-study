@@ -1,4 +1,4 @@
-
+package ru.lesson.clinic;
 /*
 	Клиника
 	дата 14.11.17
@@ -37,7 +37,10 @@ public class Clinic {
 				foundCol++;
 			}
 		}
-		return foundClients;
+		Client[] foundClients2 = new Client[foundCol];
+		for(int j = 0; j < foundCol; j++)
+			foundClients2[j] = foundClients[j];
+		return foundClients2;
 	}
 	
 	/*
@@ -51,6 +54,17 @@ public class Clinic {
 				return true;
 			}
 		return false;
+	}
+
+	/*
+		Показать клиента с определенной позиции
+		дата 15.11.17
+	*/
+	public Client getClient(int position) {
+		if(position >= currCol)
+			return null;
+		else
+			return clients[position];
 	}
 }
 

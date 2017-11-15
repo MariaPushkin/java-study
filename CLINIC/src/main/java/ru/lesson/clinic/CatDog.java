@@ -1,3 +1,5 @@
+package ru.lesson.clinic;
+
 /*
 	Котопес
 	дата 14.11.17

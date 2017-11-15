@@ -1,3 +1,5 @@
+package ru.lesson.clinic;
+
 /*
 	Клиент
 	Дата 14.11.17

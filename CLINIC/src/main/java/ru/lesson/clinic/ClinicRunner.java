@@ -1,3 +1,5 @@
+package ru.lesson.clinic;
+
 import java.util.Scanner;
 
 /*
