@@ -6,10 +6,12 @@ package ru.lesson.clinic;
 public class Clinic {
 	public final Client[] clients;
 	//текущее количество клиентов
-	private int currCol; 
+	private int currCol;
+	private int maxSize;
 	
 	public Clinic(final int size) {
 		this.clients = new Client[size];
+		this.maxSize = size;
 		this.currCol = 0;
 	}
 	
@@ -20,9 +22,13 @@ public class Clinic {
 	/*
 		Добавление клиента
 	*/
-	public void addClient(final int position, final Client client) {
-		this.clients[position] = client;
-		this.currCol++;
+	public void addClient(final Client client) throws UserException {
+		if(currCol == maxSize)
+			throw new UserException("Cant add more clients. Max size of clients base achieved");
+		else {
+			this.clients[currCol] = client;
+			this.currCol++;
+		}
 	}
 	
 	/*
@@ -51,6 +57,7 @@ public class Clinic {
 			if(name.equals(this.clients[i].getId())) {
 				for(int j = i; j < currCol - 1; j++) 
 					clients[j] = clients[j + 1];
+				currCol--;
 				return true;
 			}
 		return false;

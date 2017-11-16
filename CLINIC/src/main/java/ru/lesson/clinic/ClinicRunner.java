@@ -11,7 +11,11 @@ public class ClinicRunner {
 		Scanner reader = new Scanner(System.in);
 		try {
 			final Clinic clinic = new Clinic(10);
-			clinic.addClient(0, new Client("Brown", new Cat("Digy")));
+			try {
+				clinic.addClient(new Client("Brown", new Cat("Digy")));
+			} catch (UserException e) {
+				System.out.println(e.getMessage());
+			}
 			String exit = "n";
 			while (!exit.equals("y")) {
 				System.out.println("What are u going to do?");
@@ -31,27 +35,31 @@ public class ClinicRunner {
 					if(!clinic.checkClientByName(name)) {
 						System.out.println("What type of Animal do u have? Cat - c, Dog - d, CatDog - cd");
 						String animalType = reader.next();
-						switch (animalType) {
-							case "c":
-								System.out.println("Enter your cat name");
-								String petName = reader.next();
-								clinic.addClient(clinic.getCurrCol(), new Client(name, new Cat(petName)));
-								break;
-							case "d":
-								System.out.println("Enter your dog name");
-								String petName2 = reader.next();
-								clinic.addClient(clinic.getCurrCol(), new Client(name, new Dog(new Animal(petName2))));
-								break;
-							case "cd":
-								System.out.println("Enter your cat name");
-								String catName = reader.next();
-								System.out.println("Enter your dog name");
-								String dogName = reader.next();
-								clinic.addClient(clinic.getCurrCol(), new Client(name, new CatDog(new Cat(catName), new Dog(new Animal(dogName)))));
-								break;
-							default:
-								System.out.println("Somth wrong");
-								break;
+						try {
+							switch (animalType) {
+								case "c":
+									System.out.println("Enter your cat name");
+									String petName = reader.next();
+									clinic.addClient(new Client(name, new Cat(petName)));
+									break;
+								case "d":
+									System.out.println("Enter your dog name");
+									String petName2 = reader.next();
+									clinic.addClient(new Client(name, new Dog(new Animal(petName2))));
+									break;
+								case "cd":
+									System.out.println("Enter your cat name");
+									String catName = reader.next();
+									System.out.println("Enter your dog name");
+									String dogName = reader.next();
+									clinic.addClient(new Client(name, new CatDog(new Cat(catName), new Dog(new Animal(dogName)))));
+									break;
+								default:
+									System.out.println("Somth wrong");
+									break;
+							}
+						} catch (UserException e) {
+							System.out.println(e.getMessage());
 						}
 					}
 					else
@@ -116,12 +124,12 @@ public class ClinicRunner {
 					break;
 				//удаление клиента
 				case "d":
-					System.out.println("Enter name of deleating client");
+					System.out.println("Enter name of deleting client");
 					String delName = reader.next();
 					if(clinic.delClient(delName))
-						System.out.println("Client deleted successfuly");
+						System.out.println("Client deleted successfully");
 					else
-						System.out.println("Impossoble delete this client");
+						System.out.println("Impossible delete this client");
 					break;
 				//показ всех клиентов
 				case "s":
