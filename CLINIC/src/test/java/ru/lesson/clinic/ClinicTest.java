@@ -3,6 +3,9 @@ package ru.lesson.clinic;
 import junit.framework.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ClinicTest {
@@ -47,7 +50,5 @@ public class ClinicTest {
         Assert.assertTrue(testClinic.delClient("Ann"));
         Assert.assertFalse(testClinic.delClient("Jon"));
     }
-
-
 
 }
