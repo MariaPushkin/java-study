@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.lesson</groupId>
-    <artifactId>myarrays</artifactId>
+    <artifactId>mylists</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

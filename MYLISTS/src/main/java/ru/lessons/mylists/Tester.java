@@ -1,4 +1,4 @@
-package ru.lessons.myarrays;
+package ru.lessons.mylists;
 
 public class Tester {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package ru.lessons.myarrays;
+package ru.lessons.mylists;
 
 public class MyArrayList<T> {
     private int currMaxSize;
@@ -26,7 +26,7 @@ public class MyArrayList<T> {
         if(size >= 0) {
             insArray = new Object[size];
             this.currMaxSize = size;
-            this.size = size;
+            this.size = 0;
         } else {
             throw new IllegalArgumentException("Illegal size");
         }
@@ -62,23 +62,27 @@ public class MyArrayList<T> {
     /**
      * Возвращает первое вхождение искомого элемента
      * @param element искомый элемент
-     * @return индекс найденного элемента
-     * Дата
+     * @return индекс найденного элемента, -1 - элемент не найден
+     * Дата 19.11.17
      */
     public int indexOf(T element) {
+        for(int i = 0; i < this.size; i++) {
+            if(element.equals(this.insArray[i])) return i;
+        }
         return -1;
-        //TODO доделать
     }
 
     /**
      * Возвращает последнее вхождение искомого элемента
      * @param element искомый элемент
-     * @return индекс найденного элемента
-     * Дата
+     * @return индекс найденного элемента, -1 - элемент не найден
+     * Дата 19.11.17
      */
     public int lastIndexOf(T element) {
+        for(int i = size - 1; i >= 0; i--) {
+            if(element.equals(this.insArray[i])) return i;
+        }
         return -1;
-        //TODO доделать
     }
 
     /**
@@ -113,10 +117,10 @@ public class MyArrayList<T> {
      * Добавление элемента в конец массива
      * @param element элемент
      * @return true - удачно добавлен, false - элемент не добавлен
-     * Дата 18.11.17
+     * Дата 19.11.17
      */
     public boolean add(T element) {
-        //TODO добавить проверку на масштабирование
+        this.growArrayIfNeed();
         this.insArray[size] = element;
         size++;
         return true;
@@ -127,12 +131,63 @@ public class MyArrayList<T> {
      * @param index индекс
      * @param element элемент
      * @return
-     * Дата
+     * Дата 19.11.17
      */
     public boolean add(int index, T element) {
         this.isValidIndexForAdd(index);
+        this.growArrayIfNeed();
+        this.insArray[index] = element;
+        if(index == size) size++;
         return  true;
+    }
+
+    /**
+     * Удаление элемента из массива
+     * @param element элемент
+     * @return
+     * Дата
+     */
+    public boolean remove(T element) {
         //TODO доделать
+        return true;
+    }
+
+    /**
+     * Удаление элемента по индекса
+     * @param index индекс
+     * @return
+     * Дата 19.11.17
+     */
+    public  boolean remove(int index) {
+        this.isValidIndex(index);
+        for(int i = 0; i < size-1; i++) {
+            this.insArray[i] = this.insArray[i + 1];
+        }
+        this.insArray[size - 1] = null;
+        size--;
+        this.reduceArrayIfNeed();
+        return true;
+    }
+
+    /**
+     * Возвращает массив из элементов списка
+     * @return
+     * Дата 19.11.17
+     */
+    public Object[] toArray() {
+        Object[] findArray = new Object[this.size];
+        System.arraycopy(this.insArray,0,findArray,0,this.size);
+        return findArray;
+    }
+
+    /**
+     * Обращает список в строку
+     * @return
+     * Дата
+     */
+    public String toString() {
+        //TODO доделать
+        return new String("");
     }
 
     /**
@@ -157,6 +212,29 @@ public class MyArrayList<T> {
         if(index > this.size || index < 0)
             throw new IndexOutOfBoundsException("Wrong index");
         return true;
+    }
+
+    /**
+     * Масштабирование массива
+     * Дата 19.11.17
+     */
+    private void growArrayIfNeed() {
+        if(this.size == this.currMaxSize || this.currMaxSize*2 <= this.MAX_SIZE) {
+            T[] oldArray = (T[]) new Object[this.size];
+            System.arraycopy(this.insArray,0, oldArray, 0, this.size);
+            int newMaxSize = this.currMaxSize * 2;
+            this.insArray = new Object[newMaxSize];
+            System.arraycopy(oldArray,0,this.insArray,0,this.size);
+            this.currMaxSize = newMaxSize;
+        }
+    }
+
+    /**
+     * Уменьшение максимального размера массива
+     * Дата
+     */
+    private void reduceArrayIfNeed() {
+        //TODO сделать
     }
 
 }
