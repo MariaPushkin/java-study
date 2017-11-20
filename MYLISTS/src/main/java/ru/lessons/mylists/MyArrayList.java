@@ -23,7 +23,7 @@ public class MyArrayList<T> {
      * Дата 18.11.17
      */
     public MyArrayList(int size) {
-        if(size >= 0) {
+        if(size > 0) {
             insArray = new Object[size];
             this.currMaxSize = size;
             this.size = 0;
@@ -104,13 +104,10 @@ public class MyArrayList<T> {
      * Дата 18.11.17
      */
     public T set(int position, T element) {
-        if(this.contains(element)) {
-            T old = (T)this.insArray[position];
-            this.insArray[position] = element;
-            return old;
-        } else {
-            throw new IndexOutOfBoundsException("Illegal position");
-        }
+        this.isValidIndex(position);
+        T old = (T)this.insArray[position];
+        this.insArray[position] = element;
+        return old;
     }
 
     /**
@@ -142,13 +139,15 @@ public class MyArrayList<T> {
     }
 
     /**
-     * Удаление элемента из массива
+     * Удаление всех вхождений элемента из массива
      * @param element элемент
      * @return
-     * Дата
+     * Дата 20.11.17
      */
     public boolean remove(T element) {
-        //TODO доделать
+        while(this.contains(element)) {
+            this.remove(this.indexOf(element));
+        }
         return true;
     }
 
@@ -160,7 +159,7 @@ public class MyArrayList<T> {
      */
     public  boolean remove(int index) {
         this.isValidIndex(index);
-        for(int i = 0; i < size-1; i++) {
+        for(int i = index; i < size-1; i++) {
             this.insArray[i] = this.insArray[i + 1];
         }
         this.insArray[size - 1] = null;
@@ -183,11 +182,18 @@ public class MyArrayList<T> {
     /**
      * Обращает список в строку
      * @return
-     * Дата
+     * Дата 20.11.17
      */
     public String toString() {
-        //TODO доделать
-        return new String("");
+        StringBuilder str = new StringBuilder();
+        str.append("[");
+        for(int i = 0; i < this.size; i++) {
+            str.append(this.insArray[i]);
+            if(i != this.size - 1) str.append(",");
+        }
+        str.append("]");
+        String completedString = str.toString();
+        return completedString;
     }
 
     /**
@@ -219,7 +225,7 @@ public class MyArrayList<T> {
      * Дата 19.11.17
      */
     private void growArrayIfNeed() {
-        if(this.size == this.currMaxSize || this.currMaxSize*2 <= this.MAX_SIZE) {
+        if(this.size == this.currMaxSize && this.currMaxSize*2 <= this.MAX_SIZE) {
             T[] oldArray = (T[]) new Object[this.size];
             System.arraycopy(this.insArray,0, oldArray, 0, this.size);
             int newMaxSize = this.currMaxSize * 2;
@@ -231,10 +237,17 @@ public class MyArrayList<T> {
 
     /**
      * Уменьшение максимального размера массива
-     * Дата
+     * Дата 20.11.17
      */
     private void reduceArrayIfNeed() {
         //TODO сделать
+        if(this.size <= this.currMaxSize / this.CUT_RATE) {
+            T[] oldArray = (T[]) new Object[this.size];
+            System.arraycopy(this.insArray,0, oldArray, 0, this.size);
+            int newMaxSize = this.currMaxSize / 2;
+            this.insArray = new Object[newMaxSize];
+            System.arraycopy(oldArray,0,this.insArray,0,this.size);
+            this.currMaxSize = newMaxSize;
+        }
     }
-
 }

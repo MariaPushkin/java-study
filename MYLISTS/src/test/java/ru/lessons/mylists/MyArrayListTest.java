@@ -7,17 +7,24 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MyArrayListTest {
-    @Before
-    public void setUp() throws Exception {
-        //MyArrayList<Integer> test = new MyArrayList<Integer>(5);
-    }
 
     @Test
     public void getSize() throws Exception {
+        MyArrayList<Integer> test = new MyArrayList<Integer>(10);
+        test.add(5);
+        test.add(2);
+        test.add(3);
+        test.add(3);
+        Assert.assertEquals(4,test.getSize());
     }
 
     @Test
     public void isEmpty() throws Exception {
+        MyArrayList<Integer> test = new MyArrayList<Integer>(10);
+        Assert.assertTrue(test.isEmpty());
+        test.add(5);
+        test.add(2);
+        Assert.assertFalse(test.isEmpty());
     }
 
     @Test
@@ -53,10 +60,28 @@ public class MyArrayListTest {
 
     @Test
     public void get() throws Exception {
+        MyArrayList<String> test = new MyArrayList<String>(10);
+        test.add("Alice");
+        test.add("Doggy");
+        Assert.assertEquals("Alice",test.get(0));
     }
 
     @Test
     public void set() throws Exception {
+        MyArrayList<String> test = new MyArrayList<String>(10);
+        test.add("Alice");
+        test.add("Doggy");
+        Assert.assertEquals("Alice",test.get(0));
+        test.set(0,"Dan");
+        Assert.assertEquals("Dan",test.get(0));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void setWithException() throws Exception {
+        MyArrayList<String> test = new MyArrayList<String>(10);
+        test.add("Alice");
+        test.add("Doggy");
+        test.set(6,"Dan");
     }
 
     @Test
@@ -85,6 +110,28 @@ public class MyArrayListTest {
     }
 
     @Test
+    public void remove() throws Exception {
+        MyArrayList<Integer> test = new MyArrayList<Integer>(3);
+        test.add(5);
+        test.add(3);
+        test.add(2);
+        test.remove(1);
+        Assert.assertEquals(2,(int)test.get(1));
+    }
+
+    @Test
+    public void remove2() throws Exception {
+        MyArrayList<String> test = new MyArrayList<String>(3);
+        test.add("5");
+        test.add("3");
+        test.add("2");
+        test.add("3");
+        test.remove("3");
+        Assert.assertEquals("2",test.get(1));
+        Assert.assertEquals(2,test.getSize());
+    }
+
+    @Test
     public void toArray() throws Exception {
         MyArrayList<String> test = new MyArrayList<String>(3);
         test.add("5");
@@ -94,6 +141,15 @@ public class MyArrayListTest {
         Assert.assertEquals("5", newArray[0]);
         Assert.assertEquals("3", newArray[1]);
         Assert.assertEquals("2", newArray[2]);
+    }
+
+    @Test
+    public void toStringTest() throws Exception {
+        MyArrayList<String> test = new MyArrayList<String>(3);
+        test.add("5");
+        test.add("3");
+        test.add("2");
+        Assert.assertEquals("[5,3,2]", test.toString());
     }
 
 }
