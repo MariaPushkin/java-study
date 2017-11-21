@@ -1,6 +1,10 @@
 package ru.lessons.mylists;
 
-public class MyArrayList<T> {
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class MyArrayList<T> implements Iterable<T> {
     private int currMaxSize;
     private int size;
     private static final int MAX_SIZE = 2147483639;
@@ -248,6 +252,64 @@ public class MyArrayList<T> {
             this.insArray = new Object[newMaxSize];
             System.arraycopy(oldArray,0,this.insArray,0,this.size);
             this.currMaxSize = newMaxSize;
+        }
+    }
+
+    /**
+     *Возвращает итератор
+     * @return
+     * Дата 21.11.17
+     */
+    @Override
+    public Iterator<T> iterator() {
+        return new MyArrayListIterator();
+    }
+
+    /**
+     * Класс-итератор для массива
+     * Дата 21.11.17
+     */
+    private class MyArrayListIterator implements Iterator<T> {
+        private int pointer = -1; //текущая позиция
+
+        /**
+         * Существует ли следующий элемент
+         * @return
+         * Дата 21.11.17
+         */
+        @Override
+        public boolean hasNext() {
+            if(this.pointer >= size - 1)
+                return false;
+            else
+                return true;
+        }
+
+        /**
+         * Возвращает следущщий элемент
+         * @return
+         * Дата 21.11.17
+         */
+        @Override
+        public T next() {
+            if(!this.hasNext()) {
+                throw new NoSuchElementException("No next element");
+            } else
+                return  (T) insArray[++this.pointer];
+        }
+
+        /**
+         * Удаление выбранного элемента
+         * Дата 21.11.17
+         */
+        @Override
+        public void remove() {
+            if(this.pointer >= 0) {
+                MyArrayList.this.remove(this.pointer);
+                this.pointer--;
+            } else {
+                throw new ConcurrentModificationException();
+            }
         }
     }
 }
