@@ -78,11 +78,10 @@ public class MyLinkedList<T> implements Iterable<T> {
      * Содержится элемент в списке
      * @param element искомый элемент
      * @return
-     * Дата
+     * Дата 23.11.17
      */
     public boolean contains(T element) {
-        //TODO доделать
-        return true;
+        return (this.indexOf(element) >= 0);
     }
 
     /**
@@ -122,10 +121,13 @@ public class MyLinkedList<T> implements Iterable<T> {
     /**
      * Добавление первого элемента
      * @param element добавляемый элемент
-     * Дата
+     * Дата 23.11.17
      */
     public boolean addFirst(T element) {
-        //TODO доделать
+        Node<T> node = new Node<T>(null, this.head, element);
+        this.head.prev = node;
+        this.head = node;
+        this.size++;
         return true;
     }
 
@@ -134,41 +136,109 @@ public class MyLinkedList<T> implements Iterable<T> {
      * @param index
      * @param element
      * @return
-     * Дата
+     * Дата 23.11.17
      */
     public boolean add(int index, T element) {
-        //TODO доделать
+        this.isValidIndexForAdd(index);
+        if(index == 0) return this.addFirst(element);
+        Node<T> tmp = this.head;
+        for(int i = 0; i < index - 1; i++) {
+            tmp = tmp.next;
+        }
+        Node<T> tmpPrev = tmp.prev;
+        Node<T> tmpNext = tmp.next;
+        Node<T> node = new Node<T>(tmpPrev, tmpNext, element);
+        tmpNext.prev = node;
+        tmp.next = node;
+        this.size++;
         return true;
     }
 
 
     /**
      * Удаление элемента из конца списка
-     * @param element
      * @return
-     * Дата
+     * Дата 23.11.17
      */
-    public boolean remove(T element) {
-        //TODO доделать
+    public boolean remove() {
+        Node<T> del = this.tail;
+        if(del.prev != null) {
+            Node<T> delPrev = del.prev;
+            this.tail = delPrev;
+            delPrev.next = null;
+        }
+        del.prev = del.next = null;
+        del.item = null;
+        this.size--;
         return true;
     }
 
     /**
      * Удаление первого элемента
      * @return
-     * Дата
+     * Дата 23.11.17
      */
     public boolean removeFirst() {
-        //TODO доделать
+        Node<T> del = this.head;
+        if(del.next != null) {
+            Node<T> delNext = del.next;
+            this.head = delNext;
+            delNext.prev = null;
+        }
+        del.prev = del.next = null;
+        del.item = null;
+        this.size--;
+        return true;
+    }
+
+    /**
+     * Удаление элемента
+     * @param element удаляемый элемент
+     * @return
+     * Дата 23.11.17
+     */
+    public boolean remove(T element) {
+        if(element.equals(this.head)) removeFirst();
+        if(element.equals(this.tail)) remove();
+        while(this.contains(element)) {
+            this.remove(this.indexOf(element));
+        }
+        return true;
+    }
+
+    /**
+     * Удаление элемента по индексу
+     * @param index
+     * @return
+     * Дата 23.11.17
+     */
+    public boolean remove(int index) {
+        this.isValidIndex(index);
+        if(index == 0) return this.removeFirst();
+        if(index == this.size - 1) return this.remove();
+        Node<T> del = this.head;
+        for(int i = 0; i < index; i++) {
+            del = del.next;
+        }
+        Node<T> delPrev = del.prev;
+        Node<T> delNext = del.next;
+        delPrev.next = delNext;
+        delNext.prev = delPrev;
+        del.prev = del.next = null;
+        del.item = null;
+        this.size--;
         return true;
     }
 
     /**
      * Очистка списка
-     * Дата
+     * Дата 23.11.17
      */
     public void clear() {
-        //TODO доделать
+        for(int i = 0; i < this.size; i++) {
+            this.removeFirst();
+        }
+        this.removeFirst();
     }
 
     /**
@@ -207,11 +277,15 @@ public class MyLinkedList<T> implements Iterable<T> {
     /**
      * Возвращает индекс первого вхождения искомого элемента
      * @param element
-     * @return
-     * Дата
+     * @return индекс элемента, если найден, -1 если нет
+     * Дата 23.11.17
      */
     public int indexOf(T element) {
-        //TODO доделать
+        Node<T> tmp = this.head;
+        for(int i = 0; i < this.size; i++) {
+            if(element.equals(tmp.item)) return i;
+            tmp = tmp.next;
+        }
         return -1;
     }
 
@@ -219,10 +293,14 @@ public class MyLinkedList<T> implements Iterable<T> {
      * Возвращает индекс последнего вхождения искомого элемента
      * @param element
      * @return
-     * Дата
+     * Дата 23.11.17
      */
     public int lastIndexOf(T element) {
-        //TODO доделать
+        Node<T> tmp = this.tail;
+        for(int i = size - 1; i >= 0; i--)  {
+            if(element.equals(tmp.item)) return i;
+            tmp = tmp.prev;
+        }
         return -1;
     }
 
@@ -291,10 +369,10 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     /**
      * Класс-итератор для массива
-     * Дата 21.11.17
+     * Дата
      */
     private class MyLinkedListIterator implements Iterator<T> {
-
+        //TODO доделать
         /**
          * Существует ли следующий элемент
          * @return
