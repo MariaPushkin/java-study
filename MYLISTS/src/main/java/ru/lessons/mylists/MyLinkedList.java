@@ -307,21 +307,35 @@ public class MyLinkedList<T> implements Iterable<T> {
     /**
      * Возвращает массив из элементов списка
      * @return
-     * Дата
+     * Дата 24.11.17
      */
     public Object[] toArray() {
-        //TODO доделать
-        return new Object[10];
+        Object[] array = new Object[this.size];
+        Node<T> tmp = this.head;
+        for(int i = 0; i < this.size; i++) {
+            array[i] = tmp.item;
+            if(i < this.size - 1) tmp = tmp.next;
+        }
+        return array;
     }
 
     /**
      * Обращает список в строку
      * @return
-     * Дата
+     * Дата 24.11.17
      */
     public String toString() {
-        //TODO доделать
-        return "";
+        Node<T> tmp = this.head;
+        StringBuilder str = new StringBuilder();
+        str.append("[");
+        for(int i = 0; i < this.size; i++) {
+            str.append(this.get(i));
+            if(i != this.size - 1) str.append(",");
+            if(i < this.size - 1) tmp = tmp.next;
+        }
+        str.append("]");
+        String completedString = str.toString();
+        return completedString;
     }
 
     /**
@@ -368,38 +382,45 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     /**
-     * Класс-итератор для массива
-     * Дата
+     * Класс-итератор для списка
+     * Дата 24.11.17
      */
     private class MyLinkedListIterator implements Iterator<T> {
-        //TODO доделать
+        private int pointer = -1; //текущая позиция
+        private Node<T> currNode; //текущий узел
+
+        public MyLinkedListIterator() {
+            this.currNode = MyLinkedList.this.head;
+        }
+
         /**
          * Существует ли следующий элемент
          * @return
-         * Дата
+         * Дата 24.11.17
          */
         @Override
         public boolean hasNext() {
-            return true;
+            return this.currNode != null;
         }
 
         /**
          * Возвращает следущщий элемент
          * @return
-         * Дата
+         * Дата 24.11.17
          */
         @Override
         public T next() {
-            return (T)(new Object());
+            if (!this.hasNext()) {
+                throw new NoSuchElementException("No next element");
+            }
+            T value = currNode.item;
+            currNode = currNode.next;
+            return value;
         }
 
-        /**
-         * Удаление выбранного элемента
-         * Дата
-         */
         @Override
         public void remove() {
-
+            throw new UnsupportedOperationException();
         }
     }
 }

@@ -8,10 +8,20 @@ import static org.junit.Assert.*;
 public class MyLinkedListTest {
     @Test
     public void getFirst() throws Exception {
+        MyLinkedList<Integer> test = new MyLinkedList<Integer>();
+        test.add(2);
+        test.add(5);
+        test.add(9);
+        Assert.assertEquals(2,(int)test.getFirst());
     }
 
     @Test
     public void getLast() throws Exception {
+        MyLinkedList<Integer> test = new MyLinkedList<Integer>();
+        test.add(2);
+        test.add(5);
+        test.add(9);
+        Assert.assertEquals(9,(int)test.getLast());
     }
 
 
@@ -96,14 +106,6 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void contains() throws Exception {
-    }
-
-    @Test
-    public void size() throws Exception {
-    }
-
-    @Test
     public void clear() throws Exception {
         MyLinkedList<Integer> test = new MyLinkedList<Integer>();
         test.add(2);
@@ -156,5 +158,37 @@ public class MyLinkedListTest {
         test.add(5);
         test.add(3);
         Assert.assertEquals(3,test.lastIndexOf(3));
+    }
+
+    @Test
+    public void toArray() throws Exception {
+        MyLinkedList<String> test = new MyLinkedList<String>();
+        test.add("5");
+        test.add("3");
+        test.add("2");
+        Object[] newArray = test.toArray();
+        Assert.assertEquals("5", newArray[0]);
+        Assert.assertEquals("3", newArray[1]);
+        Assert.assertEquals("2", newArray[2]);
+    }
+
+    @Test
+    public void toStringTest() throws Exception {
+        MyLinkedList<String> test = new MyLinkedList<String>();
+        test.add("5");
+        test.add("3");
+        test.add("2");
+        Assert.assertEquals("[5,3,2]", test.toString());
+    }
+
+    @Test
+    public void forEachTest() throws Exception {
+        MyLinkedList<String> test = new MyLinkedList<String>();
+        test.add("5");
+        test.add("3");
+        test.add("2");
+        for (String element : test) {
+            System.out.println(element);
+        }
     }
 }

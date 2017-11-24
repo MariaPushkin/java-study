@@ -286,7 +286,7 @@ public class MyArrayList<T> implements Iterable<T> {
         }
 
         /**
-         * Возвращает следущщий элемент
+         * Возвращает следущий элемент
          * @return
          * Дата 21.11.17
          */
