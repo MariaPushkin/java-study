@@ -1,16 +1,21 @@
 package ru.lesson.clinic;
+
+import java.util.ArrayList;
+
 /*
 	Клиника
 	дата 14.11.17
 */
 public class Clinic {
-	public final Client[] clients;
+	//public final Client[] clients;
+	public ArrayList<Client> clients;
 	//текущее количество клиентов
 	private int currCol;
 	private int maxSize;
 	
 	public Clinic(final int size) {
-		this.clients = new Client[size];
+		//this.clients = new Client[size];
+		this.clients = new ArrayList<Client>(size);
 		this.maxSize = size;
 		this.currCol = 0;
 	}
@@ -23,10 +28,11 @@ public class Clinic {
 		Добавление клиента
 	*/
 	public void addClient(final Client client) throws UserException {
-		if(currCol == maxSize)
+		if(this.currCol == maxSize)
 			throw new UserException("Cant add more clients. Max size of clients base achieved");
 		else {
-			this.clients[currCol] = client;
+			//this.clients[currCol] = client;
+			this.clients.add(client);
 			this.currCol++;
 		}
 	}
@@ -38,8 +44,8 @@ public class Clinic {
 		Client[] foundClients = new Client[10];
 		int foundCol = 0;
 		for(int i = 0; i < this.currCol; i++){
-			if(name.equals(this.clients[i].getPet().getName())) {
-				foundClients[foundCol] = clients[i];
+			if(name.equals(this.clients.get(i).getPet().getName())) {
+				foundClients[foundCol] = this.clients.get(i);
 				foundCol++;
 			}
 		}
@@ -54,9 +60,10 @@ public class Clinic {
 	*/
 	public boolean delClient(String name) {
 		for(int i = 0; i < this.currCol; i++) 
-			if(name.equals(this.clients[i].getId())) {
-				for(int j = i; j < currCol - 1; j++) 
-					clients[j] = clients[j + 1];
+			if(name.equals(this.clients.get(i).getId())) {
+				for(int j = i; j < currCol - 1; j++)
+					this.clients.remove(j);
+					//clients[j] = clients[j + 1];
 				currCol--;
 				return true;
 			}
@@ -71,7 +78,7 @@ public class Clinic {
 		if(position >= currCol)
 			throw new UserException("No such person exists");
 		else
-			return clients[position];
+			return clients.get(position);
 	}
 
 	/*
@@ -80,7 +87,7 @@ public class Clinic {
 	*/
 	public int findClientByName(final String name) throws UserException{
 		for(int i = 0; i < this.currCol; i++){
-			if(name.equals(this.clients[i].getId())) {
+			if(name.equals(this.clients.get(i).getId())) {
 				return i;
 			}
 		}
@@ -89,7 +96,7 @@ public class Clinic {
 
 	public boolean checkClientByName(final String name) {
 		for(int i = 0; i < this.currCol; i++){
-			if(name.equals(this.clients[i].getId())) {
+			if(name.equals(this.clients.get(i).getId())) {
 				return true;
 			}
 		}

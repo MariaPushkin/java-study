@@ -90,7 +90,7 @@ public class ClinicRunner {
 						int clientPos = clinic.findClientByName(currName);
 						System.out.println("Enter new name");
 						String newCurrName = reader.next();
-						clinic.clients[clientPos].changeName(newCurrName);
+						clinic.clients.get(clientPos).changeName(newCurrName);
 
 					} catch (UserException e) {
 						System.out.println(e.getMessage());
@@ -102,18 +102,18 @@ public class ClinicRunner {
 					String currName2 = reader.next();
 					boolean exist2 = false;
 					for(int i = 0; i < clinic.getCurrCol(); i++){
-						if(currName2.equals(clinic.clients[i].getId())) {
-							if(clinic.clients[i].getPet().isCatDog()) {
+						if(currName2.equals(clinic.clients.get(i).getId())) {
+							if(clinic.clients.get(i).getPet().isCatDog()) {
 								System.out.println("Enter new cat name");
 								String newCatName = reader.next();
 								System.out.println("Enter new dog name");
 								String newDogName = reader.next();
-								clinic.clients[i].getPet().changeName(newCatName, newDogName);
+								clinic.clients.get(i).getPet().changeName(newCatName, newDogName);
 							}
 							else {
 								System.out.println("Enter new pet name");
 								String newPetName = reader.next();
-								clinic.clients[i].getPet().changeName(newPetName);
+								clinic.clients.get(i).getPet().changeName(newPetName);
 							}
 							exist2 = true;
 							break;
@@ -134,13 +134,13 @@ public class ClinicRunner {
 				//показ всех клиентов
 				case "s":
 					for(int i = 0; i < clinic.getCurrCol(); i++){
-						System.out.print("Client - " + clinic.clients[i].getId());
-						if(clinic.clients[i].getPet().isCat())
-							System.out.print(", Cat - " + clinic.clients[i].getPet().getName());
-						if(clinic.clients[i].getPet().isDog())
-							System.out.print(", Dog - " + clinic.clients[i].getPet().getName());
-						if(clinic.clients[i].getPet().isCatDog())
-							System.out.print(", CatDog - " + clinic.clients[i].getPet().getName());
+						System.out.print("Client - " + clinic.clients.get(i).getId());
+						if(clinic.clients.get(i).getPet().isCat())
+							System.out.print(", Cat - " + clinic.clients.get(i).getPet().getName());
+						if(clinic.clients.get(i).getPet().isDog())
+							System.out.print(", Dog - " + clinic.clients.get(i).getPet().getName());
+						if(clinic.clients.get(i).getPet().isCatDog())
+							System.out.print(", CatDog - " + clinic.clients.get(i).getPet().getName());
 						System.out.println();
 					}
 					break;
