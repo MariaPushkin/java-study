@@ -1,6 +1,6 @@
 package ru.lesson.clinic;
 
-import java.util.ArrayList;
+
 
 /*
 	Клиника
@@ -8,14 +8,14 @@ import java.util.ArrayList;
 */
 public class Clinic {
 	//public final Client[] clients;
-	public ArrayList<Client> clients;
+	public MyArrayList<Client> clients;
 	//текущее количество клиентов
 	private int currCol;
 	private int maxSize;
 	
 	public Clinic(final int size) {
 		//this.clients = new Client[size];
-		this.clients = new ArrayList<Client>(size);
+		this.clients = new MyArrayList<Client>(size);
 		this.maxSize = size;
 		this.currCol = 0;
 	}
