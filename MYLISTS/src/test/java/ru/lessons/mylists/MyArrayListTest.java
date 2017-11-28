@@ -162,4 +162,16 @@ public class MyArrayListTest {
             System.out.println(element);
         }
     }
+
+    @Test
+    public void CopyArrayTest() throws Exception {
+        MyArrayList<String> test = new MyArrayList<String>(3);
+        test.add("5");
+        test.add("3");
+        test.add("2");
+        MyArrayList<String> test2 = test;
+        Assert.assertEquals("5", test2.get(0));
+        Assert.assertEquals("3", test2.get(1));
+        Assert.assertEquals("2", test2.get(2));
+    }
 }

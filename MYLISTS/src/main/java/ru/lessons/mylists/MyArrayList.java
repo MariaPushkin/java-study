@@ -37,6 +37,19 @@ public class MyArrayList<T> implements Iterable<T> {
     }
 
     /**
+     * Конструктор-копирования
+     * @param array
+     * Дата 28.11.17
+     */
+    public MyArrayList(MyArrayList<T> array) {
+        //Object[] tempArray = new Object[array.getSize()];
+        this.insArray = new Object[array.getSize()];
+        System.arraycopy(array,0,this.insArray,0,array.getSize());
+        this.size = array.getSize();
+        this.currMaxSize = array.currMaxSize;
+    }
+
+    /**
      *Возвращает текущий размер массива
      * Дата 18.11.17
      */
