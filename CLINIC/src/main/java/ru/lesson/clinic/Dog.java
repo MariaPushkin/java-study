@@ -10,6 +10,7 @@ public class Dog implements Pet {
 	public Dog(final Pet pet) {
 		this.pet = pet;
 	}
+
 	
 	@Override
 	public void makeSound() {

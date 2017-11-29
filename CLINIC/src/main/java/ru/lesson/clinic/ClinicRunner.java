@@ -11,11 +11,15 @@ public class ClinicRunner {
 		Scanner reader = new Scanner(System.in);
 		try {
 			final Clinic clinic = new Clinic(10);
-			try {
+			/*try {
 				clinic.addClient(new Client("Brown", new Cat("Digy")));
 			} catch (UserException e) {
 				System.out.println(e.getMessage());
-			}
+			}*/
+			clinic.addClient(new Client("Brown", new Cat("Digy")));
+			clinic.addClient(new Client("1", new Cat("Digy")));
+			clinic.addClient(new Client("2", new Cat("Digy")));
+			clinic.addClient(new Client("3", new Cat("Digy")));
 			String exit = "n";
 			while (!exit.equals("y")) {
 				System.out.println("What are u going to do?");
@@ -35,7 +39,7 @@ public class ClinicRunner {
 					if(!clinic.checkClientByName(name)) {
 						System.out.println("What type of Animal do u have? Cat - c, Dog - d, CatDog - cd");
 						String animalType = reader.next();
-						try {
+						//try {
 							switch (animalType) {
 								case "c":
 									System.out.println("Enter your cat name");
@@ -58,11 +62,10 @@ public class ClinicRunner {
 									System.out.println("Somth wrong");
 									break;
 							}
-						} catch (UserException e) {
+						/*} catch (UserException e) {
 							System.out.println(e.getMessage());
-						}
-					}
-					else
+						}*/
+					} else
 						System.out.println("Such person has already exists");
 					break;
 				//нахождение клиентов по имени питомца

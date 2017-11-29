@@ -43,12 +43,16 @@ public class ClinicTest {
     @Test
     public void delClient() throws Exception {
         Clinic testClinic = new Clinic(10);
-        Client testClient1 = new Client("Ann",new Cat("Sandy"));
-        Client testClient2 = new Client("Kap",new Cat("Sandy"));
-        testClinic.addClient(testClient1);
-        testClinic.addClient(testClient2);
-        Assert.assertTrue(testClinic.delClient("Ann"));
-        Assert.assertFalse(testClinic.delClient("Jon"));
+        testClinic.addClient(new Client("Client4",new Cat("Sandy")));
+        testClinic.addClient(new Client("Client1",new Cat("Sandy")));
+        Assert.assertTrue(testClinic.delClient("Client1"));
+        Assert.assertFalse(testClinic.delClient("Client2"));
+        testClinic.addClient(new Client("Client2",new Cat("Sandy")));
+        testClinic.addClient(new Client("Client3",new Cat("Sandy")));
+        Assert.assertTrue(testClinic.delClient("Client4"));
+        for(int i = 0; i < testClinic.getCurrCol(); i++) {
+            System.out.println(testClinic.getClient(i).getId());
+        }
     }
 
 }

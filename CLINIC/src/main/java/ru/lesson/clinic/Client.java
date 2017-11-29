@@ -13,6 +13,11 @@ public class Client {
 		this.id = id;
 		this.pet = pet;
 	}
+
+	public Client(Client client) {
+		this.id = client.getId();
+		this.pet = client.getPet();
+	}
 	
 	/*
 		Получить id клиента

@@ -18,7 +18,7 @@ public class MyArrayList<T> implements Iterable<T> {
     public MyArrayList() {
         insArray = new Object[10];
         currMaxSize = 10;
-        size = 10;
+        size = 0;
     }
 
     /**
@@ -33,6 +33,21 @@ public class MyArrayList<T> implements Iterable<T> {
             this.size = 0;
         } else {
             throw new IllegalArgumentException("Illegal size");
+        }
+    }
+
+    /**
+     * Конструктор-копирования
+     * @param array
+     * Дата 28.11.17
+     */
+    public MyArrayList(MyArrayList<T> array) {
+        //Object[] tempArray = new Object[array.getSize()];
+        synchronized (this) {
+            this.insArray = new Object[array.getSize()];
+            System.arraycopy(array, 0, this.insArray, 0, array.getSize());
+            this.size = array.getSize();
+            this.currMaxSize = array.currMaxSize;
         }
     }
 
@@ -120,7 +135,7 @@ public class MyArrayList<T> implements Iterable<T> {
      * @return true - удачно добавлен, false - элемент не добавлен
      * Дата 19.11.17
      */
-    public boolean add(T element) {
+    public synchronized boolean add(T element) {
         this.growArrayIfNeed();
         this.insArray[size] = element;
         size++;
@@ -161,7 +176,7 @@ public class MyArrayList<T> implements Iterable<T> {
      * @return
      * Дата 19.11.17
      */
-    public  boolean remove(int index) {
+    public synchronized boolean remove(int index) {
         this.isValidIndex(index);
         for(int i = index; i < size-1; i++) {
             this.insArray[i] = this.insArray[i + 1];
@@ -300,7 +315,7 @@ public class MyArrayList<T> implements Iterable<T> {
 
         /**
          * Удаление выбранного элемента
-         * Дата 21.11.17
+         * Дата 28.11.17
          */
         @Override
         public void remove() {
