@@ -15,17 +15,10 @@ public class ClinicTest {
         Client testClient = new Client("Ann",new Cat("Sandy"));
         testClinic.addClient(testClient);
         Assert.assertEquals(testClient,testClinic.getClient(0));
-    }
-
-    @Test(expected = UserException.class)
-    public void addClientWithException() throws Exception {
-        Clinic testClinic = new Clinic(2);
-        Client testClient1 = new Client("Ann",new Cat("Sandy"));
         Client testClient2 = new Client("Kap",new Cat("Sandy"));
-        Client testClient3 = new Client("Pop",new Cat("Sandy"));
-        testClinic.addClient(testClient1);
-        testClinic.addClient(testClient2);
-        testClinic.addClient(testClient3);
+        Client testClient3 = new Client("Kap",new Cat("Pop"));
+        Assert.assertTrue(testClinic.addClient(testClient2));
+        Assert.assertFalse(testClinic.addClient(testClient3));
     }
 
     @Test
