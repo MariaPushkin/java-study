@@ -18,10 +18,14 @@ public class ClinicConcurrencyTest  {
         AdderAdmin adder3 = new AdderAdmin(testClinic,"Client3","Lola");
         DeleteAdmin delete1 = new DeleteAdmin(testClinic, "Client1");
         DeleteAdmin delete2 = new DeleteAdmin(testClinic, "Client2");
-        adder1.start(); adder2.start(); adder3.start();
-        delete1.start(); delete2.start();
-        adder1.join(); adder2.join(); adder3.join();
-        delete1.join(); delete2.join();
+        adder1.start();
+        adder2.start(); adder3.start();
+        delete1.start();
+        delete2.start();
+        adder1.join();
+        adder2.join(); adder3.join();
+        delete1.join();
+        delete2.join();
         Thread.sleep(1000);
         System.out.println("Оставшиеся крутяшки:");
         for (Client cl : testClinic.clients) {
@@ -91,7 +95,7 @@ public class ClinicConcurrencyTest  {
 
         @Override
         public void doYourWork() {
-            this.clinic.delClient(this.clientName);
+                this.clinic.delClient(this.clientName);
         }
     }
 }
