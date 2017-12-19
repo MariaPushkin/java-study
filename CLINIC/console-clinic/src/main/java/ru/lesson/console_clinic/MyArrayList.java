@@ -1,4 +1,4 @@
-package ru.lesson.clinic;
+package ru.lesson.console_clinic;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;

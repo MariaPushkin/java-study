@@ -2,6 +2,9 @@ package ru.lesson.clinic;
 
 import org.junit.Assert;
 import org.junit.Test;
+import ru.lesson.console_clinic.Cat;
+import ru.lesson.console_clinic.Client;
+import ru.lesson.console_clinic.ConcurrentClinic;
 
 
 import static org.junit.Assert.*;

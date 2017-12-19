@@ -1,5 +1,4 @@
-package ru.lesson.clinic;
-
+package ru.lesson.console_clinic;
 /*
  Пользовательское исключение
  дата 15.11.17

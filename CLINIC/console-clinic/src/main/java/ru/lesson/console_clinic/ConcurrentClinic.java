@@ -1,4 +1,4 @@
-package ru.lesson.clinic;
+package ru.lesson.console_clinic;
 
 /**
  * Потокобезопасная клиника

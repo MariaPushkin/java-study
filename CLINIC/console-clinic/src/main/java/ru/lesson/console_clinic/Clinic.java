@@ -1,4 +1,5 @@
-package ru.lesson.clinic;
+package ru.lesson.console_clinic;
+
 
 /*
 	Клиника
@@ -63,7 +64,7 @@ public class Clinic {
 		Показать клиента с определенной позиции
 		дата 15.11.17
 	*/
-	public Client getClient(int position) throws UserException{
+	public Client getClient(int position) throws UserException {
 		if(position >= this.clients.getSize())
 			throw new UserException("No such person exists");
 		else

@@ -1,14 +1,5 @@
 package ru.lesson.console_clinic;
 
-import ru.lesson.clinic.*;
-import ru.lesson.clinic.Animal;
-import ru.lesson.clinic.Cat;
-import ru.lesson.clinic.CatDog;
-import ru.lesson.clinic.Client;
-import ru.lesson.clinic.Clinic;
-import ru.lesson.clinic.Dog;
-import ru.lesson.clinic.UserException;
-
 import java.util.Scanner;
 
 /*
@@ -58,7 +49,7 @@ public class ClinicRunner {
 									String catName = reader.next();
 									System.out.println("Enter your dog name");
 									String dogName = reader.next();
-									clinic.addClient(new Client(name, new CatDog(new Cat(catName), new ru.lesson.clinic.Dog(new Animal(dogName)))));
+									clinic.addClient(new Client(name, new CatDog(new Cat(catName), new Dog(new Animal(dogName)))));
 									break;
 								default:
 									System.out.println("Somth wrong");

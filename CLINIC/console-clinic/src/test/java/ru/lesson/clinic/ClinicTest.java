@@ -2,6 +2,9 @@ package ru.lesson.clinic;
 
 import junit.framework.Assert;
 import org.junit.Test;
+import ru.lesson.console_clinic.Cat;
+import ru.lesson.console_clinic.Clinic;
+import ru.lesson.console_clinic.Client;
 
 import java.util.ArrayList;
 import java.util.List;
