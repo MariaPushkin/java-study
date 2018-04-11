@@ -4,7 +4,10 @@ package ru.lesson.console_clinic;
 	дата 14.11.17
 */
 public class Dog implements Pet {
-	//базовая реализация питомца
+	/*
+	Композиция (подход)
+	базовая реализация питомца
+	 */
 	private final Pet pet;
 	
 	public Dog(final Pet pet) {

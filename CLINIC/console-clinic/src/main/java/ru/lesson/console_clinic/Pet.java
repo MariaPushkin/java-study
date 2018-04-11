@@ -7,5 +7,5 @@ public interface Pet {
 	boolean isCatDog();
 	boolean isDog();
 	boolean isCat();
-	public void changeName(String newName1, String ... newName2);
+	void changeName(String newName1, String ... newName2);
 }

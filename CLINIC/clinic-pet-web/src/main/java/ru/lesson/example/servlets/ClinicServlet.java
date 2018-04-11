@@ -1,4 +1,4 @@
-package ru.lesson.servlets;
+package ru.lesson.example.servlets;
 
 import ru.lesson.console_clinic.Cat;
 import ru.lesson.console_clinic.Client;
@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
@@ -20,6 +18,8 @@ public class ClinicServlet extends HttpServlet{
     //final List<Client> clients = new CopyOnWriteArrayList<Client>();
     //final List<Pet> pets = new CopyOnWriteArrayList<Pet>();
     final Clinic clinic = new Clinic(10);
+    Client[] foundClients = new Client[0];
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,7 +38,7 @@ public class ClinicServlet extends HttpServlet{
                 "       Enter your pet name:" + "<br>" +
                 "       <input type='submit' value='Search' name='act'>" +
                 "     <form>"+
-                this.viewPets() + this.serachResult() +
+                this.viewPets() + this.searchResult() +
                 "</body>" + "</html>"
         );
         writer.flush();
@@ -51,7 +51,7 @@ public class ClinicServlet extends HttpServlet{
         if (act.equals("Submit")) {
             this.clinic.addClient(new Client(req.getParameter("name"),new Cat(req.getParameter("pet"))));
         } else if (act.equals("Search")) {
-            //update button was pressed
+            this.foundClients = this.clinic.findClientByPetName(req.getParameter("search"));
         }
         doGet(req, resp);
     }
@@ -68,7 +68,17 @@ public class ClinicServlet extends HttpServlet{
         return sb.toString();
     }
 
-    private String serachResult() {
+    private String searchResult() {
+        if(this.foundClients.length > 0) {
+            StringBuffer sb = new StringBuffer();
+            sb.append("<p>Clients with pet named</p>").append(this.foundClients[0].getPet().getName());
+            sb.append("<br><p>");
+            for (Client cl : this.foundClients) {
+                sb.append(cl.getId()).append("<br>");
+            }
+            sb.append("</p>");
+            return sb.toString();
+        }
         return "";
     }
 }
