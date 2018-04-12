@@ -95,5 +95,6 @@ public class Clinic {
 		}
 		return false;
 	}
+
 }
 

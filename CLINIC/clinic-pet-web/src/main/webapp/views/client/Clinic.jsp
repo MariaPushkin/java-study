@@ -35,13 +35,14 @@
         </tr>
     </table>
 </form>
-<a href="${pageContext.servletContext.contextPath}/views/client/ClientAdd.jsp">Добавить клиента</a>
 <p>Список клиентов с животными:</p><br>
 <table border="1">
     <c:forEach items="${clients}" var="client" varStatus="status">
         <tr valign="top">
             <td>${client.getId()}</td>
             <td>${client.getPet().getName()}</td>
+            <td><a href="${pageContext.servletContext.contextPath}/client/edit?name=${client.getId()}">Редактировать</a></td>
+            <td><a href="${pageContext.servletContext.contextPath}/client/delete?name=${client.getId()}">Удалить</a></td>
         </tr>
     </c:forEach>
 </table>

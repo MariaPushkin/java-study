@@ -14,9 +14,6 @@ public class ClientViewServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(!CLINIC_MODEL.getClients().isEmpty()) {
-            System.out.println(CLINIC_MODEL.getClients().get(0).getId());
-        }
         req.setAttribute("clients", CLINIC_MODEL.getClients());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/client/Clinic.jsp");
         dispatcher.forward(req, resp);
