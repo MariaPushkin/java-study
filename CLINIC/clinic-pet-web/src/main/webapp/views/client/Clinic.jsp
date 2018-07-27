@@ -23,6 +23,13 @@
             </td>
         </tr>
         <tr>
+            <td align="right">Pet type : </td>
+            <td>
+                <lable><input type="radio" name="petType" id="petTypeCat" value="Cat" checked>Cat</lable>
+                <lable><input type="radio" name="petType" id="petTypeDog" value="Dog">Dog</lable>
+            </td>
+        </tr>
+        <tr>
             <td align="right" >Pet name : </td>
             <td>
                 <input type="text" name="petname">
@@ -37,10 +44,18 @@
 </form>
 <p>Список клиентов с животными:</p><br>
 <table border="1">
+    <tr valign="top">
+        <th>Client name</th>
+        <th>Pet name</th>
+        <th>Pet type</th>
+        <th>-</th>
+        <th>-</th>
+    </tr>
     <c:forEach items="${clients}" var="client" varStatus="status">
         <tr valign="top">
             <td>${client.getId()}</td>
             <td>${client.getPet().getName()}</td>
+            <td>${client.getPetType()}</td>
             <td><a href="${pageContext.servletContext.contextPath}/client/edit?name=${client.getId()}">Редактировать</a></td>
             <td><a href="${pageContext.servletContext.contextPath}/client/delete?name=${client.getId()}">Удалить</a></td>
         </tr>

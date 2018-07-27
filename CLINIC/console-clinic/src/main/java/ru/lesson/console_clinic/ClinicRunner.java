@@ -128,12 +128,13 @@ public class ClinicRunner {
 				case "s":
 					for(int i = 0; i < clinic.getCurrCol(); i++){
 						System.out.print("Client - " + clinic.clients.get(i).getId());
-						if(clinic.clients.get(i).getPet().isCat())
+						/*if(clinic.clients.get(i).getPet().isCat())
 							System.out.print(", Cat - " + clinic.clients.get(i).getPet().getName());
 						if(clinic.clients.get(i).getPet().isDog())
 							System.out.print(", Dog - " + clinic.clients.get(i).getPet().getName());
 						if(clinic.clients.get(i).getPet().isCatDog())
-							System.out.print(", CatDog - " + clinic.clients.get(i).getPet().getName());
+							System.out.print(", CatDog - " + clinic.clients.get(i).getPet().getName());*/
+						System.out.print("," + clinic.clients.get(i).getPetType() + " - " + clinic.clients.get(i).getPet().getName());
 						System.out.println();
 					}
 					break;
